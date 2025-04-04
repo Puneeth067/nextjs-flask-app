@@ -8,7 +8,7 @@ def get_items():
     items = Item.query.all()
     return jsonify([item.to_dict() for item in items])
 
-@items_bp.route('/items/', methods=['GET'])
+@items_bp.route('/items/<int:id>', methods=['GET'])
 def get_item(id):
     item = Item.query.get_or_404(id)
     return jsonify(item.to_dict())
@@ -30,7 +30,7 @@ def create_item():
     
     return jsonify(new_item.to_dict()), 201
 
-@items_bp.route('/items/', methods=['PUT'])
+@items_bp.route('/items/<int:id>', methods=['PUT'])
 def update_item(id):
     item = Item.query.get_or_404(id)
     data = request.get_json()
@@ -44,7 +44,7 @@ def update_item(id):
     
     return jsonify(item.to_dict())
 
-@items_bp.route('/items/', methods=['DELETE'])
+@items_bp.route('/items/<int:id>', methods=['DELETE'])
 def delete_item(id):
     item = Item.query.get_or_404(id)
     db.session.delete(item)

@@ -4,6 +4,7 @@ import os
 from config import Config
 from models.item import db, Item
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -23,6 +24,10 @@ def create_app():
     @app.route('/api/health')
     def health_check():
         return jsonify({"status": "ok"})
+    
+    @app.route('/')
+    def index():
+        return jsonify({"message": "Welcome to the Flask API"})
     
     return app
 
